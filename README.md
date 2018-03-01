@@ -8,20 +8,17 @@ _See the [cypher examples](docs/cypher.md) for cool screenshots._
 
 This script _runs through_ a **bitcoin blockchain** and inserts it in to a **Neo4j graph database**.
 
-I use this script to power my bitcoin blockchain browser: <http://learnmeabitcoin.com/browser> 
-
 **Important:**
 
-* **The resulting Neo4j database is roughly _6x_ the size of the blockchain.** So if the blockchain is 100GB, your Neo4j database will be **600GB**.
+* **The resulting Neo4j database is roughly _6x_ the size of the blockchain.** 
+If blockchain = 170GB, your Neo4j database will be **1200GB** or **1.2TB**
+
 * **It may take 60+ days to finish importing the entire blockchain.** Instead of doing a bulk import of the entire blockchain, this script runs through each `blk.dat`<sup>[1](#blkdat)</sup> file and inserts each block and transaction it encounters. So whilst it takes "a while" for an initial import, when it's complete it will continuously add new blocks as they arrive.
 
 Nonetheless, you can still [browse](docs/cypher.md) whatever is in the database whilst this script is running.
 
 ## Install.
-
-I have only used this on **Linux (Ubuntu)**.
-
-It should work on OSX and Windows, but I haven't got installation instructions for those.
+Only tested on **Linux (Ubuntu 16.04)**.
 
 ### Software.
 
@@ -35,13 +32,17 @@ sudo apt update
 sudo apt install bitcoind
 ```
 
-2. **[Neo4j 3.0+](https://neo4j.com/)**
+2. **[Java8](http://www.oracle.com/)**
 
 ```bash
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt update
 sudo apt install oracle-java8-installer
+```
 
+3. **[Neo4j 3.0+](https://neo4j.com/)**
+
+```bash
 wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
 echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list
 sudo mv /tmp/neo4j.list /etc/apt/sources.list.d
@@ -49,14 +50,14 @@ sudo apt update
 sudo apt install neo4j
 ```
 
-3. **[PHP 7.0+](http://php.net/)** - The main script and it's library functions are written in PHP.
+4. **[PHP 7.0+](http://php.net/)** - The main script and it's library functions are written in PHP.
 
 ```bash
 # The extra php7.0-* libraries are needed for this script to run.
 sudo apt install php7.0 php7.0-dev php7.0-gmp php7.0-curl php7.0-bcmath php7.0-mbstring
 ```
 
-4. **[Redis 3.2+](https://redis.io/)** - This is used for storing the state of the import, so that the script can be stopped and started at any time.
+5. **[Redis 3.2+](https://redis.io/)** - This is used for storing the state of the import, so that the script can be stopped and started at any time.
 
 ```bash
 sudo apt install build-essential
@@ -67,7 +68,7 @@ sudo tar -xvzf redis-3.2.11.tar.gz
 sudo rm redis-3.2.11.tar.gz
 
 cd redis-3.2.11
-cd depsRe
+cd deps
 sudo make geohash-int jemalloc lua hiredis linenoise
 cd ..
 sudo make
