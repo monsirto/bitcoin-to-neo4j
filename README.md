@@ -62,12 +62,12 @@ sudo apt install php7.0 php7.0-dev php7.0-gmp php7.0-curl php7.0-bcmath php7.0-m
 sudo apt install build-essential
 
 cd /usr/local/share
-sudo wget http://download.redis.io/releases/redis-stable.tar.gz
-sudo tar -xvzf redis-stable.tar.gz 
-sudo rm redis-stable.tar.gz
+sudo wget http://download.redis.io/releases/redis-3.2.11.tar.gz
+sudo tar -xvzf redis-3.2.11.tar.gz
+sudo rm redis-3.2.11.tar.gz
 
-cd redis-stable
-cd deps
+cd redis-3.2.11
+cd depsRe
 sudo make geohash-int jemalloc lua hiredis linenoise
 cd ..
 sudo make
@@ -97,12 +97,13 @@ sudo apt install php7.0-dev
 
 # Install phpredis
 cd /usr/local/share
-sudo wget https://github.com/phpredis/phpredis/archive/php7.zip 
-sudo unzip php7.zip
-sudo rm php7.zip
+sudo wget https://github.com/phpredis/phpredis/archive/3.1.6.zip
+sudo unzip 3.1.6.zip
+sudo rm 3.1.6.zip
 
-cd phpredis-php7/
+cd phpredis-3.1.6/
 sudo phpize
+sudo ./configure
 sudo make
 sudo make install
 
