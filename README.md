@@ -176,6 +176,18 @@ Here are some [example cypher queries](docs/cypher.md), including some screensho
 
 ### What are the hardware requirements?
 
+As with any indexing environment, to maximise performance, your source location/data (Bitcoin Blocks) and your target location/data (Graph DB) should be on different physical storage volumes. This will limit reading and writing to the same volume.
+
+Once again, if you are familiar with large volume indexing, RAM is King. 
+
+### Monsirto's Build - Feb 2018
+First build to test Bitcoin to Neo4j solution.
+
+* HP z820 Workstation Dual Xeon
+* 10TB OS / DATA Volume
+* 128 GB RAM
+
+===============OLD=========================
 1. A really ****ing big SSD.
 
 Other than that, I run this on my _Thinkpad X220_ (8GB Ram, 4x2.60GHz CPU) without any problems. It took about 2 weeks to import the full _testnet_ blockchain (50GB total), but my laptop didn't explode.
@@ -188,6 +200,8 @@ However, if you want to help things along:
     * Page Cache: Whatever RAM you have got left over.
 
 CPU isn't much of a factor in comparison to RAM and a fast disk.
+
+===============END OLD=========================
 
 _See [Neo4j Performance](http://neo4j.com/docs/operations-manual/current/performance/) for more details._
 
